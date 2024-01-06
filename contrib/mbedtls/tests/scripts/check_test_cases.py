@@ -120,8 +120,7 @@ state may override this method.
             tests_dir = '.'
         elif os.path.isdir('../suites'):
             tests_dir = '..'
-        directories = [tests_dir]
-        return directories
+        return [tests_dir]
 
     def walk_all(self):
         """Iterate over all named test cases."""
@@ -184,8 +183,9 @@ def main():
     checker = DescriptionChecker(results)
     checker.walk_all()
     if (results.warnings or results.errors) and not options.quiet:
-        sys.stderr.write('{}: {} errors, {} warnings\n'
-                         .format(sys.argv[0], results.errors, results.warnings))
+        sys.stderr.write(
+            f'{sys.argv[0]}: {results.errors} errors, {results.warnings} warnings\n'
+        )
     sys.exit(1 if results.errors else 0)
 
 if __name__ == '__main__':
